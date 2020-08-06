@@ -1,18 +1,10 @@
 import mysql.connector
-mydb = mysql.connector.connect(
-    host = "localhost",
-    user = "root",
-    password = "Macbookpro"  #Enter your sql password
-)
-mycursor = mydb.cursor()  #Used to establish connection with sql server
-
-#Creating database and table
-mycursor.execute("CREATE DATABASE IF NOT EXISTS plagirismcheck") 
-mycursor.execute("USE plagirismcheck")
-mycursor.execute("CREATE TABLE IF NOT EXISTS DATAS (FILENAME VARCHAR(255), SIMILARITY FLOAT(10))")
-mycursor.execute("DELETE FROM DATAS")
-
 from threading import *
+
+from nltk.tokenize import word_tokenize, sent_tokenize
+from string import punctuation
+
+
 class ThreadWithReturnValue(Thread):
     def __init__(self, group=None, target=None, name=None,
                  args=(), kwargs={}, Verbose=None):
@@ -27,9 +19,6 @@ class ThreadWithReturnValue(Thread):
         Thread.join(self, *args)
         return self._return
 
-
-from nltk.tokenize import word_tokenize, sent_tokenize
-from string import punctuation
 
 def EditDistDP(str1, str2):
     
